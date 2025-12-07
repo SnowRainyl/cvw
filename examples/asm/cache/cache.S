@@ -20,10 +20,12 @@ test1:
 	sw s11, 8(sp)
 	addi s0, sp, 112     # set up s0 to point to start of stack frame
 
-    li a0, 0xCAFECAFE    # return value	
+    la   a0, __data_start    # cache start address
+    li   a3, 0xCAFECAFE    # return value	
+	sw a3, (a0)
 
 #     .globl flush_data_section
-# flush_data_section:
+flush_data_section:
     la   a0, __data_start    # cache start address
     la   a1, __data_end      # cache end address
 
@@ -32,12 +34,43 @@ test1:
 flush_loop:
     beq  a0, a1, end_flush          # if cache end address, done
 
-    cbo.flush 0(a0)             # flush cache block containing [a0]
+    cbo.zero 0(a0)             # flush cache block containing [a0]
 
     add  a0, a0, t0          # a0 += block size
     blt  a0, a1, flush_loop          # loop while a0 < a1
 
 end_flush:
+
+	# li t0, 0x80000770
+	# sw zero, 0(t0)
+	# sw zero, 1(t0)
+	# lw t1, (t0)
+	# addi t0, t0, 1
+	# sw t1, (t0)
+
+	# // way 1
+	# li t0, 0x80001770
+	# sw zero, 0(t0)
+	# sw zero, 1(t0)
+	# lw t1, (t0)
+	# addi t0, t0, 1
+	# sw t1, (t0)
+
+	# // way 2
+	# li t0, 0x80002770
+	# sw zero, 0(t0)
+	# sw zero, 1(t0)
+	# lw t1, (t0)
+	# addi t0, t0, 1
+	# sw t1, (t0)
+
+	# // way 3
+	# li t0, 0x80003770
+	# sw zero, 0(t0)
+	# sw zero, 1(t0)
+	# lw t1, (t0)
+	# addi t0, t0, 1
+	# sw t1, (t0)
 
 
     # ABI epilogue

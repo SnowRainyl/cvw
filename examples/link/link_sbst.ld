@@ -20,16 +20,6 @@ __stack_size = 0x00400;
 /* Sections                                                             */
 /*----------------------------------------------------------------------*/
 
-/*TODO: define a cache zone
-
-.data :
-{
-  __data_start = .;
-  *(.data*)
-  __data_end = .;
-} > ram
-
-*/
 
 SECTIONS
 {
