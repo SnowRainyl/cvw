@@ -9,15 +9,13 @@ const signature_t const GOLDEN_SIGNATURES[NUMTESTS] = {
 // Info on cache instructions:
 // https://docs.riscv.org/reference/isa/v20240411/unpriv/cmo.html
 
-extern char __data_start[];
-extern char __data_end[];
 
 // cbo.flush --> flushes a cacheline 
 
 // Flush all the cache
 void cache_flush(void) {
-    char *p = __data_start;
-    char *end = __data_end;
+    uint8_t *p = __data_start;
+    uint8_t *end = __data_end;
     const unsigned line = 512;   // size taken form derivlist.txt
 
     for (; p < end; p += line) {
@@ -32,8 +30,8 @@ void cache_flush_block(void* addr) {
 //cbo.clean   --> Cleans a cache block
 
 void cache_clean(void) {
-    char *p = __data_start;
-    char *end = __data_end;
+    uint8_t *p = __data_start;
+    uint8_t *end = __data_end;
     const unsigned line = 512;   // size taken form derivlist.txt
 
     for (; p < end; p += line) {
@@ -47,8 +45,8 @@ void cache_clean_block(void* addr) {
 
 //cbo.inval   --> Perform an invalidate operation on a cache block
 void cache_inval(void) {
-    char *p = __data_start;
-    char *end = __data_end;
+    uint8_t *p = __data_start;
+    uint8_t *end = __data_end;
     const unsigned line = 512;   // size taken form derivlist.txt
 
     for (; p < end; p += line) {
@@ -61,8 +59,8 @@ void cache_inval_block(void* addr) {
 
 //cbo.zero    --> Store zeros to the full set of bytes corresponding to a cache block
 void cache_zero(void) {
-    char *p = __data_start;
-    char *end = __data_end;
+    uint8_t *p = __data_start;
+    uint8_t *end = __data_end;
     const unsigned line = 512;   // size taken form derivlist.txt
 
     for (; p < end; p += line) {
