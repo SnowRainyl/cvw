@@ -1,7 +1,10 @@
 # Readme CAD
 
 # Preliminaries
-After activated your EDA tools.
+After activated your EDA tools environment with:
+```bash
+source eda_tools_setup
+```
 You need to prepare your simulation environment with :
 ```bash
 git submodule update --init addins/verilog-ethernet/
