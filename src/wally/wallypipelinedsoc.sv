@@ -216,74 +216,74 @@ module wallypipelinedsoc import cvw::*; #(parameter cvw_t P)  (
  
   always @(posedge clk)  begin 
   // Output signals  
-  if (!reset) begin 
-  assign HSELEXT = HSELEXT_gate; 
-  assert ( HSELEXT_gate == HSELEXT_RTL ) else $warning("HSELEXT mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HSELEXT_gate, HSELEXT_RTL);
+  if (reset) begin // active low reset 
+  HSELEXT <= HSELEXT_gate; 
+  assert ( HSELEXT_gate === HSELEXT_RTL ) else $warning("HSELEXT mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HSELEXT_gate, HSELEXT_RTL);
 
-  assign HCLK = HCLK_gate; 
-  assert ( HCLK_gate == HCLK_RTL ) else $warning("HCLK mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HCLK_gate, HCLK_RTL);
-
-  
-  assign HRESETn = HRESETn_gate; 
-  assert ( HRESETn_gate == HRESETn_RTL ) else $warning("HRESETn mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HRESETn_gate, HRESETn_RTL);
+  HCLK <= HCLK_gate; 
+  assert ( HCLK_gate === HCLK_RTL ) else $warning("HCLK mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HCLK_gate, HCLK_RTL);
 
   
-  assign HADDR = HADDR_gate; 
-  assert ( HADDR_gate == HADDR_RTL ) else $warning("HADDR mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HADDR_gate, HADDR_RTL);
+  HRESETn <= HRESETn_gate; 
+  assert ( HRESETn_gate === HRESETn_RTL ) else $warning("HRESETn mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HRESETn_gate, HRESETn_RTL);
 
-  assign HWDATA = HWDATA_gate; 
-  assert ( HWDATA_gate == HWDATA_RTL ) else $warning("HWDATA mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HWDATA_gate, HWDATA_RTL);
   
-  assign HWSTRB = HWSTRB_gate; 
-  assert ( HWSTRB_gate == HWSTRB_RTL ) else $warning("HWSTRB mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HWSTRB_gate, HWSTRB_RTL);
+  HADDR <= HADDR_gate; 
+  assert ( HADDR_gate === HADDR_RTL ) else $warning("HADDR mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HADDR_gate, HADDR_RTL);
 
-  assign HWRITE = HWRITE_gate; 
-  assert ( HWRITE_gate == HWRITE_RTL ) else $warning("HWRITE mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HWRITE_gate, HWRITE_RTL);
+  HWDATA <= HWDATA_gate; 
+  assert ( HWDATA_gate === HWDATA_RTL ) else $warning("HWDATA mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HWDATA_gate, HWDATA_RTL);
+  
+  HWSTRB <= HWSTRB_gate; 
+  assert ( HWSTRB_gate === HWSTRB_RTL ) else $warning("HWSTRB mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HWSTRB_gate, HWSTRB_RTL);
 
-  assign HSIZE = HSIZE_gate; 
-  assert ( HSIZE_gate == HSIZE_RTL ) else $warning("HSIZE mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HSIZE_gate, HSIZE_RTL);
+  HWRITE <= HWRITE_gate; 
+  assert ( HWRITE_gate === HWRITE_RTL ) else $warning("HWRITE mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HWRITE_gate, HWRITE_RTL);
 
-  assign HBURST = HBURST_gate; 
-  assert ( HBURST_gate == HBURST_RTL ) else $warning("HBURST mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HBURST_gate, HBURST_RTL);
+  HSIZE <= HSIZE_gate; 
+  assert ( HSIZE_gate === HSIZE_RTL ) else $warning("HSIZE mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HSIZE_gate, HSIZE_RTL);
 
-  assign HPROT = HPROT_gate; 
-  assert ( HPROT_gate == HPROT_RTL ) else $warning("HPROT mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HPROT_gate, HPROT_RTL);
-  
-  assign HTRANS = HTRANS_gate; 
-  assert ( HTRANS_gate == HTRANS_RTL ) else $warning("HTRANS mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HTRANS_gate, HTRANS_RTL);
+  HBURST <= HBURST_gate; 
+  assert ( HBURST_gate === HBURST_RTL ) else $warning("HBURST mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HBURST_gate, HBURST_RTL);
 
-  assign HMASTLOCK = HMASTLOCK_gate; 
-  assert ( HMASTLOCK_gate == HMASTLOCK_RTL ) else $warning("HMASTLOCK mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HMASTLOCK_gate, HMASTLOCK_RTL);
+  HPROT <= HPROT_gate; 
+  assert ( HPROT_gate === HPROT_RTL ) else $warning("HPROT mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HPROT_gate, HPROT_RTL);
   
-  assign HREADY = HREADY_gate; 
-  assert ( HREADY_gate == HREADY_RTL ) else $warning("HREADY mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HREADY_gate, HREADY_RTL);
-  
-  assign GPIOOUT = GPIOOUT_gate; 
-  assert ( GPIOOUT_gate == GPIOOUT_RTL ) else $warning("GPIOOUT mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), GPIOOUT_gate, GPIOOUT_RTL);
-  
-  assign GPIOEN = GPIOEN_gate; 
-  assert ( GPIOEN_gate == GPIOEN_RTL ) else $warning("GPIOEN mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), GPIOEN_gate, GPIOEN_RTL);
+  HTRANS <= HTRANS_gate; 
+  assert ( HTRANS_gate === HTRANS_RTL ) else $warning("HTRANS mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HTRANS_gate, HTRANS_RTL);
 
-  assign UARTSout = UARTSout_gate; 
-  assert ( UARTSout_gate == UARTSout_RTL ) else $warning("UARTSout mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), UARTSout_gate, UARTSout_RTL);
+  HMASTLOCK <= HMASTLOCK_gate; 
+  assert ( HMASTLOCK_gate === HMASTLOCK_RTL ) else $warning("HMASTLOCK mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HMASTLOCK_gate, HMASTLOCK_RTL);
   
-  assign SPIOut = SPIOut_gate; 
-  assert ( SPIOut_gate == SPIOut_RTL ) else $warning("SPIOut mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), SPIOut_gate, SPIOut_RTL);
+  HREADY <= HREADY_gate; 
+  assert ( HREADY_gate === HREADY_RTL ) else $warning("HREADY mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), HREADY_gate, HREADY_RTL);
   
-  assign SPICS = SPICS_gate; 
-  assert ( SPICS_gate == SPICS_RTL ) else $warning("SPICS mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), SPICS_gate, SPICS_RTL);
+  GPIOOUT <= GPIOOUT_gate; 
+  assert ( GPIOOUT_gate === GPIOOUT_RTL ) else $warning("GPIOOUT mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), GPIOOUT_gate, GPIOOUT_RTL);
+  
+  GPIOEN <= GPIOEN_gate; 
+  assert ( GPIOEN_gate === GPIOEN_RTL ) else $warning("GPIOEN mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), GPIOEN_gate, GPIOEN_RTL);
 
-  assign SPICLK = SPICLK_gate; 
-  assert ( SPICLK_gate == SPICLK_RTL ) else $warning("SPICLK mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), SPICLK_gate, SPICLK_RTL);
+  UARTSout <= UARTSout_gate; 
+  assert ( UARTSout_gate === UARTSout_RTL ) else $warning("UARTSout mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), UARTSout_gate, UARTSout_RTL);
+  
+  SPIOut <= SPIOut_gate; 
+  assert ( SPIOut_gate === SPIOut_RTL ) else $warning("SPIOut mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), SPIOut_gate, SPIOut_RTL);
+  
+  SPICS <= SPICS_gate; 
+  assert ( SPICS_gate === SPICS_RTL ) else $warning("SPICS mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), SPICS_gate, SPICS_RTL);
 
-  assign SDCCmd = SDCCmd_gate; 
-  assert ( SDCCmd_gate == SDCCmd_RTL ) else $warning("SDCCmd mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), SDCCmd_gate, SDCCmd_RTL);
+  SPICLK <= SPICLK_gate; 
+  assert ( SPICLK_gate === SPICLK_RTL ) else $warning("SPICLK mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), SPICLK_gate, SPICLK_RTL);
+
+  SDCCmd <= SDCCmd_gate; 
+  assert ( SDCCmd_gate === SDCCmd_RTL ) else $warning("SDCCmd mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), SDCCmd_gate, SDCCmd_RTL);
   
-  assign SDCCS = SDCCS_gate; 
-  assert ( SDCCS_gate == SDCCS_RTL ) else $warning("SDCCS mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), SDCCS_gate, SDCCS_RTL);
+  SDCCS <= SDCCS_gate; 
+  assert ( SDCCS_gate === SDCCS_RTL ) else $warning("SDCCS mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), SDCCS_gate, SDCCS_RTL);
   
-  assign SDCCLK = SDCCLK_gate; 
-  assert ( SDCCLK_gate == SDCCLK_RTL ) else $warning("SDCCLK mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), SDCCLK_gate, SDCCLK_RTL);
+  SDCCLK <= SDCCLK_gate; 
+  assert ( SDCCLK_gate === SDCCLK_RTL ) else $warning("SDCCLK mismatch @ %t ( Gate: 0x%h  --- RTL: 0x%h)", $time(), SDCCLK_gate, SDCCLK_RTL);
   end 
   end 
   `endif /*GATE_LEVEL*/
