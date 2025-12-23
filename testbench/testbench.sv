@@ -537,6 +537,8 @@ module testbench;
             $display("Error: Could not open file %s", memfilename);
             $finish;
           end
+`ifdef VCS_COMPILE_BOOTROM
+          // VCS still try to elaborate the access to the bootrom even if it is not defined
           if (P.BOOTROM_SUPPORTED) begin
             readResult = $fread(dut.uncoregen.uncore.bootrom.bootrom.memory.ROM, memFile);
             `ifdef GATE_LEVEL
@@ -547,6 +549,7 @@ module testbench;
             $display("Buildroot test requires BOOTROM_SUPPORTED");
             $finish;
           end
+`endif /*VCS_COMPILE_BOOTROM*/
           $fclose(memFile);
           memFile = $fopen(memfilename, "rb");
           if (memFile == 0) begin
@@ -564,6 +567,8 @@ module testbench;
             $display("Error: Could not open file %s", memfilename);
             $finish;
           end
+`ifdef VCS_COMPILE_BOOTROM
+          // VCS still try to elaborate the access to the bootrom even if it is not defined
           if (P.BOOTROM_SUPPORTED) begin
             readResult = $fread(dut.uncoregen.uncore.bootrom.bootrom.memory.ROM, memFile);
             `ifdef GATE_LEVEL
@@ -571,6 +576,7 @@ module testbench;
             `endif  /*GATE_LEVEL*/
           end
           $fclose(memFile);
+`endif /*VCS_COMPILE_BOOTROM*/
           memFile = $fopen(memfilename, "rb");
           if (memFile == 0) begin
             $display("Error: Could not open file %s", memfilename);
